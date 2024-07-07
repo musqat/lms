@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>배너 수정</title>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        table th, table td {
+            border: solid 1px #000;
+            padding: 8px;
+        }
+        table th {
+            width: 150px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+<div th:replace="/fragments/layout.html :: fragment-admin-body-menu"></div>
+<h1>배너 수정</h1>
+<form method="post" action="/admin/banner/edit" enctype="multipart/form-data">
+    <input type="hidden" name="id" th:value="${banner.id}" />
+    <table>
+        <tbody>
+        <tr>
+            <th>배너명</th>
+            <td><input type="text" name="name" th:value="${banner.name}" placeholder="배너명 입력"></td>
+        </tr>
+        <tr>
+            <th>배너 파일</th>
+            <td><input type="file" name="file"></td>
+        </tr>
+        <tr>
+            <th>링크 주소</th>
+            <td><input type="text" name="link" th:value="${banner.link}" placeholder="링크 주소 입력"></td>
+        </tr>
+        <tr>
+            <th>오픈 방법</th>
+            <td>
+                <select name="target">
+                    <option value="_self" th:selected="${banner.target == '_self'}">현재 창</option>
+                    <option value="_blank" th:selected="${banner.target == '_blank'}">새 창</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th>정렬 순서</th>
+            <td><input type="number" name="sortOrder" th:value="${banner.sortOrder}" placeholder="정렬 순서 입력"></td>
+        </tr>
+        <tr>
+            <th>공개 여부</th>
+            <td><input type="checkbox" name="published" th:checked="${banner.published}"> 공개</td>
+        </tr>
+        </tbody>
+    </table>
+    <div>
+        <button type="submit">배너 수정하기</button>
+        <a href="/admin/banner/list">목록 이동</a>
+    </div>
+</form>
+</body>
+</html>
